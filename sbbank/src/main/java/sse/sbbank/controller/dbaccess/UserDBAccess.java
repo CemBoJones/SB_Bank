@@ -62,7 +62,7 @@ public class UserDBAccess implements Serializable {
                 query = connect.createStatement();
 
                 // Tabelle anzeigen
-                String sql = "SELECT * FROM citycampus.personen";
+                String sql = "SELECT * FROM USER";
                 ResultSet result = query.executeQuery(sql);
 
                 // Ergebnisstabelle durchforsten    
@@ -109,12 +109,6 @@ public class UserDBAccess implements Serializable {
             Statement query;
             try {
                 query = connect.createStatement();
-                int kontonummer;
-                String vorname;
-                String nachname;
-                String username;
-                String passwort;
-                double kontostand;
 
                 String sql = "Insert Into USER(idUSER, vorname, nachname, username, passwort, kontostand, KONTOBEWEGUNGEN_idKONTOBEWEGUNGENT) VALUES ( \""
                         + toAdd.getKontonummer() + "\", \""
