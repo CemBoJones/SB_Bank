@@ -11,7 +11,7 @@ import java.io.Serializable;
  *
  * @author Marco
  */
-public class user implements Serializable{
+public class User implements Serializable{
     
     private int idUser;
     private String vorname;
@@ -20,9 +20,9 @@ public class user implements Serializable{
     private String passwort;
     private int kontonummer;
 
-    public user(){}
+    public User(){}
     
-    public user(int idUser, String vorname, String nachname, String username, String passwort, int kontonummer) {
+    public User(int idUser, String vorname, String nachname, String username, String passwort, int kontonummer) {
         this.idUser = idUser;
         this.vorname = vorname;
         this.nachname = nachname;

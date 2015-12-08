@@ -11,15 +11,15 @@ import java.io.Serializable;
  *
  * @author Marco
  */
-public class admin implements Serializable{
+public class Admin implements Serializable{
     
     private int idAdmin;
     private String adminname;
     private String adminpasswort;
 
-    public admin(){};
+    public Admin(){};
     
-    public admin(int idAdmin, String adminname, String adminpasswort) {
+    public Admin(int idAdmin, String adminname, String adminpasswort) {
         this.idAdmin = idAdmin;
         this.adminname = adminname;
         this.adminpasswort = adminpasswort;
