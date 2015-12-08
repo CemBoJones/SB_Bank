@@ -92,16 +92,16 @@ public class UserDBAccess implements Serializable {
         //TODO write methode to delete a person from DB
     }
 
-    void insertPersonenToDB(Person toAdd) {
+    void insertPersonenToDB(User toAdd) {
         try {
             Class.forName("com.mysql.jdbc.Driver"); // Datenbanktreiber für JDBC Schnittstellen laden.
 
             // Verbindung zur JDBC-Datenbank herstellen.
             connect = DriverManager.getConnection("jdbc:mysql://" + db_host + ":" + db_port + "/mysql?" + "user=" + db_user + "&password=" + db_password);
         } catch (ClassNotFoundException e) {
-            
+
         } catch (SQLException e) {
-            
+
         }
 
         if (connect != null) {
@@ -109,29 +109,21 @@ public class UserDBAccess implements Serializable {
             Statement query;
             try {
                 query = connect.createStatement();
-                String terminalUnitType="";
-                String cpuType = "";
-                if (toAdd.getTerminalUnitType() == null) {
-                    terminalUnitType="";
-                }
-                if(toAdd.getCpuType() == null){
-                    cpuType = "";
-                }
-                String sql = "Insert Into personen(materialNr, picture, ProductGroup, ShortDescription, Type, FullTextDescription,TechnicalDetails, QuantityAI, QuantityAO, QuantityAX, QuantityDI, QuantityDO, QuantityDX, TerminalUnitType, Voltage, Amperage, Thermocouple, Transistor, Relay, Slotquantity,CPUType, isECO, hasEthernet, RAM, Accessoirtype, FieldBusType, TerminalBaseType, isXC, isSafety) VALUES ( \"" + toAdd.getMaterialNumber() + "\", \""
-                        + toAdd.getPicture().substring(0, toAdd.getPicture().length() - 4) + "\", \"" + toAdd.getProductGroup() + "\", \""
-                        + toAdd.getShortDescription() + "\", \"" + toAdd.getType() + "\", \""
-                        + toAdd.getFullTextDescription() + "\", \"" + toAdd.getTechnicalDetailsPath() + "\", \""
-                        + toAdd.getQuantityAI() + "\", \"" + toAdd.getQuantityAO() + "\", \""
-                        + toAdd.getQuantityAX() + "\", \"" + toAdd.getQuantityDI() + "\", \""
-                        + toAdd.getQuantityDO() + "\", \"" + toAdd.getQuantityDX() + "\", \""
-                        + terminalUnitType + "\", \"" + toAdd.getVoltage() + "\", \""
-                        + toAdd.getAmperage() + "\", \"" + toAdd.getThermocouple() + "\", \""
-                        + toAdd.getTransistor() + "\", \"" + toAdd.getRelay() + "\", \""
-                        + toAdd.getSlotquantity() + "\", \"" + cpuType + "\", \""
-                        + (toAdd.getIsECO() ? 1 : 0) + "\", \"" + (toAdd.getHasEthernet() ? 1 : 0) + "\", \""
-                        + toAdd.getRam() + "\", \"" + toAdd.getAccessoirtype() + "\", \""
-                        + toAdd.getFildbusType() + "\", \"" + toAdd.getTerminalbaseType() + "\", \""
-                        + (toAdd.getIsExtremCondition() ? 1 : 0) + "\", \"" + (toAdd.getIsSafety() ? 1 : 0) + "\");";
+                int kontonummer;
+                String vorname;
+                String nachname;
+                String username;
+                String passwort;
+                double kontostand;
+
+                String sql = "Insert Into USER(idUSER, vorname, nachname, username, passwort, kontostand, KONTOBEWEGUNGEN_idKONTOBEWEGUNGENT) VALUES ( \""
+                        + toAdd.getKontonummer() + "\", \""
+                        + toAdd.getVorname() + "\", \""
+                        + toAdd.getNachname() + "\", \""
+                        + toAdd.getUsername() + "\", \""
+                        + toAdd.getPasswort() + "\", \""
+                        + toAdd.getKontostand() + "\", \""
+                        + "\");";
                 int result = query.executeUpdate(sql);
             } catch (SQLException e) {
                 if (DEBUG) {
@@ -140,7 +132,5 @@ public class UserDBAccess implements Serializable {
             }
         }
     }
-
-}
 
 }

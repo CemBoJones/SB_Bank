@@ -13,30 +13,30 @@ import java.io.Serializable;
  */
 public class User implements Serializable{
     
-    private int idUser;
+    private int kontonummer;
     private String vorname;
     private String nachname;
     private String username;
     private String passwort;
-    private int kontonummer;
+    private double kontostand;
 
     public User(){}
     
-    public User(int idUser, String vorname, String nachname, String username, String passwort, int kontonummer) {
-        this.idUser = idUser;
+    public User(int kontonummer, String vorname, String nachname, String username, String passwort, double kontostand) {
+        this.kontonummer = kontonummer;
         this.vorname = vorname;
         this.nachname = nachname;
         this.username = username;
         this.passwort = passwort;
+        this.kontostand = kontostand;
+    }
+
+    public int getKontonummer() {
+        return kontonummer;
+    }
+
+    public void setKontonummer(int kontonummer) {
         this.kontonummer = kontonummer;
-    }
-
-    public int getIdUser() {
-        return idUser;
-    }
-
-    public void setIdUser(int idUser) {
-        this.idUser = idUser;
     }
 
     public String getVorname() {
@@ -71,11 +71,12 @@ public class User implements Serializable{
         this.passwort = passwort;
     }
 
-    public int getKontonummer() {
-        return kontonummer;
+    public double getKontostand() {
+        return kontostand;
     }
 
-    public void setKontonummer(int kontonummer) {
-        this.kontonummer = kontonummer;
+    public void setKontostand(double kontostand) {
+        this.kontostand = kontostand;
     }
+    
 }
