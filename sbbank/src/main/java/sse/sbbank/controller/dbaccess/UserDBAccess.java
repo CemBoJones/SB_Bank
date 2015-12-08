@@ -24,7 +24,7 @@ import sse.sbbank.model.User;
  */
 public class UserDBAccess implements Serializable {
 
-    boolean DEBUG = true;
+    boolean DEBUG = false;
     private List<User> userListTemp = new LinkedList<User>();
     private Connection connect = null;
     private Statement statement = null;
@@ -67,33 +67,17 @@ public class UserDBAccess implements Serializable {
 
                 // Ergebnisstabelle durchforsten    
                 while (result.next()) {
-                    Person temp = new Person(
-                            result.getInt("idPersonen"),
-                            result.getString("geschlecht"),
+                    User temp = new User(
+                            result.getInt("idUSER"),
                             result.getString("vorname"),
                             result.getString("nachname"),
-                            result.getDate("geburtstag"),
-                            result.getString("trainings_schwerpunkte"),
-                            result.getString("geburtsland"),
-                            result.getString("bemerkung"),
-                            result.getBoolean("hat_lrs"),
-                            result.getBoolean("hat_dys"),
-                            result.getString("einschneidendes_erlebnis"),
-                            result.getInt("NOTIZEN_idNOTIZEN"),
-                            result.getInt("DOKUMENTE_idDOKUMENTE"),
-                            result.getInt("FAMILIAERER_HINTERGRUND_idFAMILIAERER_HINTERGRUND"),
-                            result.getInt("TELEKOMMUNIKATION_idTELEKOMMUNIKATION"),
-                            result.getInt("TESTUNG_idTESTUNG"),
-                            result.getInt("SCHULISCHER_HINTERGRUND_idSCHULISCHER_HINTERGRUND"),
-                            result.getInt("FOERDERUNG_idFOERDERUNG"),
-                            result.getInt("MEDIZINISCHER_HINTERGRUND_idMEDIZINISCHER_HINTERGRUND"),
-                            result.getInt("PSYCHOLOGISCHER_HINTERGRUND_idPSYCHOLOGISCHER_HINTERGRUND"),
-                            result.getInt("PAEDAGOGISCHE_TESTUNG_idPAEDAGOGISCHE_TESTUNG"),
-                            result.getInt("TRAININGSSCHWERPUNKTE_idTRAININGSSCHWERPUNKTE")
+                            result.getString("username"),
+                            result.getString("passwort"),
+                            result.getDouble("kontostand")
                     );
                     if (DEBUG) {
                     }
-                    personenListTemp.add(temp);
+                    userListTemp.add(temp);
                 }
             } catch (SQLException e) {
                 if (DEBUG) {
@@ -101,7 +85,7 @@ public class UserDBAccess implements Serializable {
                 }
             }
         }
-        return personenListTemp;
+        return userListTemp;
     }
 
     void deletePersonFromDB(int idPersonen) {
