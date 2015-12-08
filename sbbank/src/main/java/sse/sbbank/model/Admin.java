@@ -48,6 +48,4 @@ public class Admin implements Serializable{
     public void setAdminpasswort(String adminpasswort) {
         this.adminpasswort = adminpasswort;
     }
-    
-    
 }
