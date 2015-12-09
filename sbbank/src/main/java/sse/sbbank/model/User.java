@@ -6,29 +6,33 @@
 package sse.sbbank.model;
 
 import java.io.Serializable;
+import javax.enterprise.context.SessionScoped;
+import javax.faces.bean.ManagedBean;
 
 /**
  *
  * @author Marco
  */
+@SessionScoped
+@ManagedBean
 public class User implements Serializable{
     
     private int kontonummer;
     private String vorname;
     private String nachname;
     private String username;
-    private String passwort;
+    private String password;
     private double kontostand;
     private boolean isAdmin;
 
     public User(){}
     
-    public User(int kontonummer, String vorname, String nachname, String username, String passwort, double kontostand, boolean isAdmin) {
+    public User(int kontonummer, String vorname, String nachname, String username, String password, double kontostand, boolean isAdmin) {
         this.kontonummer = kontonummer;
         this.vorname = vorname;
         this.nachname = nachname;
         this.username = username;
-        this.passwort = passwort;
+        this.password = password;
         this.kontostand = kontostand;
         this.isAdmin = isAdmin;
     }
@@ -66,11 +70,11 @@ public class User implements Serializable{
     }
 
     public String getPasswort() {
-        return passwort;
+        return password;
     }
 
     public void setPasswort(String passwort) {
-        this.passwort = passwort;
+        this.password = passwort;
     }
 
     public double getKontostand() {

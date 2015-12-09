@@ -36,7 +36,7 @@ public class DBAccess implements Serializable {
     private final String db_password = "";
 
     /**
-     * Connects to the Personen DB and creates Person Objects in a list from the
+     * Connects to the User DB and creates User Objects in a list from the
      * date records.
      *
      * @return PersonenList
@@ -62,7 +62,7 @@ public class DBAccess implements Serializable {
                 query = connect.createStatement();
 
                 // Tabelle anzeigen
-                String sql = "SELECT * FROM USER";
+                String sql = "SELECT * FROM mydb.USER";
                 ResultSet result = query.executeQuery(sql);
 
                 // Ergebnisstabelle durchforsten    
@@ -89,8 +89,33 @@ public class DBAccess implements Serializable {
         return userListTemp;
     }
 
-    void deletePersonFromDB(int idPersonen) {
-        //TODO write methode to delete a person from DB
+    void deletePersonFromDB(int idUser) {
+        try {
+            Class.forName("com.mysql.jdbc.Driver"); // Datenbanktreiber für JDBC Schnittstellen laden.
+
+            // Verbindung zur JDBC-Datenbank herstellen.
+            connect = DriverManager.getConnection("jdbc:mysql://" + db_host + ":" + db_port + "/mysql?" + "user=" + db_user + "&password=" + db_password);
+        } catch (ClassNotFoundException e) {
+            
+        } catch (SQLException e) {
+            
+        }
+
+        if (connect != null) {
+            // Abfrage-Statement erzeugen.
+            Statement query;
+            try {
+                query = connect.createStatement();
+
+                String sql = "Delete From mydb.USER where idUser = \"" + idUser + "\";";
+                int result = query.executeUpdate(sql);
+
+            } catch (SQLException e) {
+                if (DEBUG) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 
     void insertPersonenToDB(User toAdd) {
@@ -111,7 +136,7 @@ public class DBAccess implements Serializable {
             try {
                 query = connect.createStatement();
 
-                String sql = "Insert Into USER(idUSER, vorname, nachname, username, passwort, kontostand, isAdmin) VALUES ( \""
+                String sql = "Insert Into mydb.USER(idUSER, vorname, nachname, username, passwort, kontostand, isAdmin) VALUES ( \""
                         + toAdd.getKontonummer() + "\", \""
                         + toAdd.getVorname() + "\", \""
                         + toAdd.getNachname() + "\", \""
