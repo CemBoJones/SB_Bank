@@ -19,16 +19,18 @@ public class User implements Serializable{
     private String username;
     private String passwort;
     private double kontostand;
+    private boolean isAdmin;
 
     public User(){}
     
-    public User(int kontonummer, String vorname, String nachname, String username, String passwort, double kontostand) {
+    public User(int kontonummer, String vorname, String nachname, String username, String passwort, double kontostand, boolean isAdmin) {
         this.kontonummer = kontonummer;
         this.vorname = vorname;
         this.nachname = nachname;
         this.username = username;
         this.passwort = passwort;
         this.kontostand = kontostand;
+        this.isAdmin = isAdmin;
     }
 
     public int getKontonummer() {
@@ -77,6 +79,14 @@ public class User implements Serializable{
 
     public void setKontostand(double kontostand) {
         this.kontostand = kontostand;
+    }
+
+    public boolean isIsAdmin() {
+        return isAdmin;
+    }
+
+    public void setIsAdmin(boolean isAdmin) {
+        this.isAdmin = isAdmin;
     }
     
 }

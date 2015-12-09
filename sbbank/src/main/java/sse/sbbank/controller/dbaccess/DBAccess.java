@@ -22,7 +22,7 @@ import sse.sbbank.model.User;
  *
  * @author Marco
  */
-public class UserDBAccess implements Serializable {
+public class DBAccess implements Serializable {
 
     boolean DEBUG = false;
     private List<User> userListTemp = new LinkedList<User>();
@@ -52,7 +52,7 @@ public class UserDBAccess implements Serializable {
                 e.printStackTrace();
             }
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(UserDBAccess.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DBAccess.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         if (connect != null) {
@@ -73,7 +73,8 @@ public class UserDBAccess implements Serializable {
                             result.getString("nachname"),
                             result.getString("username"),
                             result.getString("passwort"),
-                            result.getDouble("kontostand")
+                            result.getDouble("kontostand"),
+                            result.getBoolean("isAdmin")
                     );
                     if (DEBUG) {
                     }
@@ -110,13 +111,14 @@ public class UserDBAccess implements Serializable {
             try {
                 query = connect.createStatement();
 
-                String sql = "Insert Into USER(idUSER, vorname, nachname, username, passwort, kontostand, KONTOBEWEGUNGEN_idKONTOBEWEGUNGENT) VALUES ( \""
+                String sql = "Insert Into USER(idUSER, vorname, nachname, username, passwort, kontostand, isAdmin) VALUES ( \""
                         + toAdd.getKontonummer() + "\", \""
                         + toAdd.getVorname() + "\", \""
                         + toAdd.getNachname() + "\", \""
                         + toAdd.getUsername() + "\", \""
                         + toAdd.getPasswort() + "\", \""
                         + toAdd.getKontostand() + "\", \""
+                        + toAdd.isIsAdmin() + "\", \""
                         + "\");";
                 int result = query.executeUpdate(sql);
             } catch (SQLException e) {
