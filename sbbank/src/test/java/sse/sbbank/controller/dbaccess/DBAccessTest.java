@@ -51,30 +51,15 @@ public class DBAccessTest {
         assertEquals(expResult, result);
     }
 
-//    /**
-//     * Test of deletePersonFromDB method, of class DBAccess.
-//     */
-//    @Test
-//    public void testDeletePersonFromDB() {
-//        System.out.println("deletePersonFromDB");
-//        int idUser = 0;
-//        DBAccess instance = new DBAccess();
-//        instance.deletePersonFromDB(idUser);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
-//
-//    /**
-//     * Test of insertPersonenToDB method, of class DBAccess.
-//     */
-//    @Test
-//    public void testInsertPersonenToDB() {
-//        System.out.println("insertPersonenToDB");
-//        User toAdd = null;
-//        DBAccess instance = new DBAccess();
-//        instance.insertPersonenToDB(toAdd);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
-    
+    /**
+     * Test of insertPersonenToDB method, of class DBAccess.
+     */
+    @Test
+    public void testInsertPersonenToDB() {
+        System.out.println("insertPersonenToDB");
+        User toAdd = new User(1, "Max", "Mustermann", "MaMu", "123456", 0.0, false);
+        DBAccess instance = new DBAccess();
+        instance.insertPersonenToDB(toAdd);
+        assertEquals(toAdd, instance.getUserListFromDB().get(1));
+    }
 }

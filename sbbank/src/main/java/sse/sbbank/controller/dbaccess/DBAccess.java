@@ -143,8 +143,8 @@ public class DBAccess implements Serializable {
                         + toAdd.getUsername() + "\", \""
                         + toAdd.getPasswort() + "\", \""
                         + toAdd.getKontostand() + "\", \""
-                        + (toAdd.isIsAdmin()?1:0) + "\", \""
-                        + "\");";
+                        + (toAdd.isIsAdmin()?1:0) + "\""
+                        + ");";
                 int result = query.executeUpdate(sql);
             } catch (SQLException e) {
                 if (DEBUG) {
@@ -153,5 +153,4 @@ public class DBAccess implements Serializable {
             }
         }
     }
-
 }
