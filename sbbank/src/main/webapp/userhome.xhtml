@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <ui:composition template="templates/default/content.xhtml"
+                    xmlns="http://www.w3.org/1999/xhtml"
+                    xmlns:h="http://xmlns.jcp.org/jsf/html"
+                    xmlns:f="http://java.sun.com/jsf/core"
+                    xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+        
+        <div class="col-sm-3 col-md-2 sidebar">
+            <ui:include src="leftMenu.xhtml" />
+        </div>
+      
+        <ui:define name="content">
+            <h2>Herzlich Willkommen bei der SB Bank!</h2>
+            <h:panelGrid id="grid" columns="2">
+                <h:outputText value="Vorname:"/>
+                <h:outputText value="#{customer.firstName}"/>
+                <h:outputText value="Nachname:"/>
+                <h:outputText value="#{customer.lastName}"/>
+            </h:panelGrid>
+        </ui:define>
+    </ui:composition>
+</html>

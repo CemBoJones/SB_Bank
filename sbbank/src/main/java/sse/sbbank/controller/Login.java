@@ -5,7 +5,6 @@ package sse.sbbank.controller;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -18,7 +17,7 @@ import sse.sbbank.model.User;
  * @author Marco
  */
 @Named
-@ManagedBean(name="login")
+@ManagedBean(name = "login")
 @SessionScoped
 public class Login {
 
@@ -46,15 +45,21 @@ public class Login {
 
     public String login() {
         userList = userAccess.getUserListFromDB();
-        boolean found=false;
+        boolean found = false;
+        int foundUser = -1;
         for (int i = 0; i < userList.size(); i++) {
             if (userName.equals(userList.get(i).getUsername()) && password.equals(userList.get(i).getPasswort())) {
-                found=true;
+                found = true;
+                foundUser = i;
             }
+
         }
-        if(found){
-             return "success";
-        }else{
+        if (found) {
+            User user = userList.get(foundUser);
+            if (user.isIsAdmin()) {
+                return "Admin success";
+            }else return "success";
+        } else {
             return "fail";
         }
     }
@@ -87,6 +92,4 @@ public class Login {
 //            fc.addMessage(passwordID, fm);
 //            fc.renderResponse();
 //        }
-
-
 }
