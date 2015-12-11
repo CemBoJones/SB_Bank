@@ -46,11 +46,9 @@ public class DBAccessTest {
     public void testGetUserListFromDB() {
         System.out.println("getUserListFromDB");
         DBAccess instance = new DBAccess();
-        List<User> expResult = null;
+        List<User> expResult = instance.getUserListFromDB();
         List<User> result = instance.getUserListFromDB();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
 //    /**
