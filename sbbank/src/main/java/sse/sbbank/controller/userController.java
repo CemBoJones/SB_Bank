@@ -17,7 +17,7 @@ import sse.sbbank.model.User;
  *
  * @author Marco
  */
-@ManagedBean
+@ManagedBean(name = "userController", eager = true)
 @SessionScoped
 public class UserController implements Serializable{
     DBAccess dbaccess = new DBAccess();

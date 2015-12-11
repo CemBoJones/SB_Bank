@@ -18,7 +18,7 @@ import sse.sbbank.model.User;
  * @author Marco
  */
 @Named
-@ManagedBean
+@ManagedBean(name="login")
 @SessionScoped
 public class Login {
 
