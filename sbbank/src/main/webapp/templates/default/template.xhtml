@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>SB Bank</title>
+        <h:outputStylesheet name="bootstrap/css/bootstrap.css" />
+        <h:outputStylesheet name="css/dashboard.css" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js" />
+        <h:outputScript name="bootstrap/js/bootstrap.js" />
+    </h:head>
+    <h:body>
+        <ui:insert name="header">
+            <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+                <div class="container">
+                    <div class="navbar-header">
+                        <a class="navbar-brand" href="#">
+                            <h:graphicImage value="resources/images/Logo_W100.png"/>
+                        </a>
+                    </div>               
+                </div>
+            </div>
+        </ui:insert>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xs-2 col-sm-2 col-md-2 sidebar">
+                    <ui:insert name="leftSidebar"/>
+                </div>
+                <div class="col-xs-10 col-xs-offset-2 col-sm-10 col-sm-offset-2 col-md-10 col-md-offset-2 main">  
+                    <ui:insert name="content"/>
+                </div>
+            </div>
+        </div>
+    </h:body>
+</html>
