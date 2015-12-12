@@ -19,7 +19,7 @@ import sse.sbbank.model.User;
  */
 @ManagedBean(name = "userController", eager = true)
 @SessionScoped
-public class UserController implements Serializable{
+public class AddUserBean implements Serializable{
     private DBAccess dbaccess = new DBAccess();
     private List <User> userlist = new LinkedList<User>();
     
@@ -28,7 +28,7 @@ public class UserController implements Serializable{
     private String username;
     private String passwort;
 
-    public UserController() {
+    public AddUserBean() {
         this.init();
     }
     
@@ -36,7 +36,7 @@ public class UserController implements Serializable{
         userlist = dbaccess.getUserListFromDB();
     }
     
-    public void adNewUser() {
+    public void addNewUser() {
         User tempUser = new User(nextKontonummer(), vorname, nachname, username, passwort, 0.0, false);
         dbaccess.insertPersonenToDB(tempUser);
     }
