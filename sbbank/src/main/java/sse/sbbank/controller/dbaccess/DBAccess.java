@@ -89,7 +89,7 @@ public class DBAccess implements Serializable {
         return userListTemp;
     }
 
-    void deletePersonFromDB(int idUser) {
+    public void deletePersonFromDB(int idUser) {
         try {
             Class.forName("com.mysql.jdbc.Driver"); // Datenbanktreiber für JDBC Schnittstellen laden.
 
@@ -118,7 +118,7 @@ public class DBAccess implements Serializable {
         }
     }
 
-    void insertPersonenToDB(User toAdd) {
+    public void insertPersonenToDB(User toAdd) {
         try {
             Class.forName("com.mysql.jdbc.Driver"); // Datenbanktreiber für JDBC Schnittstellen laden.
 

@@ -20,14 +20,69 @@ import sse.sbbank.model.User;
 @ManagedBean(name = "userController", eager = true)
 @SessionScoped
 public class UserController implements Serializable{
-    DBAccess dbaccess = new DBAccess();
-    List <User> userlist = new LinkedList<User>();
+    private DBAccess dbaccess = new DBAccess();
+    private List <User> userlist = new LinkedList<User>();
+    
+    private String vorname;
+    private String nachname;
+    private String username;
+    private String passwort;
+
+    public UserController() {
+        this.init();
+    }
+    
     
     public void init (){
         userlist = dbaccess.getUserListFromDB();
     }
     
-    public void adNewUser(int kontonummer, String vorname, String nachname, String username, String passwort) {
-        User tempUser = new User(kontonummer, vorname, nachname, username, passwort, 0, false);
+    public void adNewUser() {
+        User tempUser = new User(nextKontonummer(), vorname, nachname, username, passwort, 0.0, false);
+        dbaccess.insertPersonenToDB(tempUser);
     }
+
+    private int nextKontonummer(){
+        int nextKontonummer = 0;
+        for(User u : userlist){
+            while(nextKontonummer <= u.getKontonummer()){
+                nextKontonummer++;
+            }
+        }
+        return nextKontonummer;
+    }
+
+    public String getVorname() {
+        return vorname;
+    }
+
+    public void setVorname(String vorname) {
+        this.vorname = vorname;
+    }
+
+    public String getNachname() {
+        return nachname;
+    }
+
+    public void setNachname(String nachname) {
+        this.nachname = nachname;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPasswort() {
+        return passwort;
+    }
+
+    public void setPasswort(String passwort) {
+        this.passwort = passwort;
+    }
+    
+    
 }
