@@ -15,18 +15,26 @@ and open the template in the editor.
         <div class="col-sm-3 col-md-2 sidebar">
             <ui:define name="leftSidebar">
                 <ui:decorate template="templates/default/leftSidebar.xhtml">
-                    <li class="active"><a href="adminhome.xhtml">Übersicht</a></li>
+                    <li><a href="adminhome.xhtml">Übersicht</a></li>
                     <li><a href="#">Kunden anzeigen</a></li>
                     <li><a href="adminAddUser.xhtml">Kunden hinzufügen</a></li>
-                    <li><a href="adminDeleteUser.xhtml">Kunden löschen</a></li>
+                    <li class="active"><a href="adminDeleteUser.xhtml">Kunden löschen</a></li>
                     <li><a href="#">Logout</a></li>
                 </ui:decorate>
             </ui:define>
         </div>
         <ui:define name="content">
-            <h2>Herzlich Willkommen bei der SB Bank!</h2>
-            <p>Sie sind als Admin eingeloggt.</p>
-            <p>Bitte wählen Sie Ihren Menüpunkt.</p>
+            <b:panel title="Kunden löschen" collapsible="false">               
+                <h:form style="margin:10px;">
+                    <p>Kontonummer des Kunden:</p>
+                    <h:panelGrid columns="2" >
+                        <h:outputLabel for="kontoNo" class="space-right5">Kontonummer:</h:outputLabel>
+                        <b:inputText id="kontoNo" value="#{deleteUserBean.kontonummer}"/>                     
+                    </h:panelGrid>
+                    <b:commandButton value="Löschen" action="#{deleteUserBean.deleteUser()}"  />
+                </h:form>
+            </b:panel>
+            
         </ui:define>
     </ui:composition>
 </html>

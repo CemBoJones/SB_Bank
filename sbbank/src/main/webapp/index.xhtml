@@ -12,9 +12,9 @@
                     <p>Bitte loggen Sie sich ein.</p>
                     <h:form style="margin:10px; max-width: 250px">
                         <h:panelGrid columns="2">
-                            <h:outputLabel for="username">Username:</h:outputLabel>
+                            <h:outputLabel for="username" class="space-right5">Username:</h:outputLabel>
                             <b:inputText id="username" value="#{login.userName}"/>
-                            <h:outputLabel for="password">Passwort:</h:outputLabel>
+                            <h:outputLabel for="password" class="space-right5">Passwort:</h:outputLabel>
                             <b:inputSecret id="password" value="#{login.password}"/>
                         </h:panelGrid>
                         <b:commandButton value="Login" action="#{login.login}"  />

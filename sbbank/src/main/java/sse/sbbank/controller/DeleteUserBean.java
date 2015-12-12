@@ -26,4 +26,14 @@ public class DeleteUserBean {
     public void deleteUser(){
         dBAccess.deletePersonFromDB(Kontonummer);
     }
+
+    public int getKontonummer() {
+        return Kontonummer;
+    }
+
+    public void setKontonummer(int Kontonummer) {
+        this.Kontonummer = Kontonummer;
+    }
+    
+   
 }
