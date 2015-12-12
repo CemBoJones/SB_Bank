@@ -22,7 +22,7 @@ public class Logout {
 
     public String logout() {
         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
-        return "/index.xhtml?faces-redirect=true";
+        return "/sbbank/index.xhtml?faces-redirect=true";
     }
     
 }
