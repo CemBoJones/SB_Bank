@@ -10,18 +10,20 @@ and open the template in the editor.
                     xmlns="http://www.w3.org/1999/xhtml"
                     xmlns:h="http://xmlns.jcp.org/jsf/html"
                     xmlns:f="http://java.sun.com/jsf/core"
+                    xmlns:b="http://bootsfaces.net/ui"
                     xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
         <ui:define name="leftSidebar">
             <ui:decorate template="templates/default/leftSidebar.xhtml">
-                <li class="active"><a href="#">Übersicht</a></li>
-                <li><a href="userBankBalance.xhtml">Kontostand anzeigen</a></li>
+                <li><a href="userhome.xhtml">Übersicht</a></li>
+                <li class="active"><a href="userBankBalance.xhtml">Kontostand anzeigen</a></li>
                 <li><a href="userTransfer.xhtml">Neue Überweisung</a></li>
                 <li><a href="#">Logout</a></li>
             </ui:decorate>
         </ui:define>
         <ui:define name="content">
-            <h2>Herzlich Willkommen #{login.userName}!</h2>
-            <p>Bitte wählen Sie einen Menüpunkt aus.</p>
+            <b:panel title="Ihr aktueller Kontostand" collapsible="false">               
+                <p>Kontostand #{user.kontostand}</p>
+            </b:panel>
         </ui:define>
     </ui:composition>
 </html>

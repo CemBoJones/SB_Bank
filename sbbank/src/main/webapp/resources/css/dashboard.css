@@ -12,7 +12,16 @@ body {
     padding: 40px 15px;
     text-align: center;
 }
+.space-right5{
+    padding-right: 5px;
+}
+.navbar-brand{
+    padding: 4px 0 0;
+}
 
+.container-nav{
+    padding-left: 10px;
+}
 /*
  * Global add-ons
  */
