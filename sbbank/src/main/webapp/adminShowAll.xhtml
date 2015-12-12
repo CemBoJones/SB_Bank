@@ -16,49 +16,48 @@ and open the template in the editor.
             <ui:define name="leftSidebar">
                 <ui:decorate template="templates/default/leftSidebar.xhtml">
                     <li><a href="adminhome.xhtml">Übersicht</a></li>
-                    <li><a href="#">Kunden anzeigen</a></li>
+                    <li class="active"><a href="#">Kunden anzeigen</a></li>
                     <li><a href="adminAddUser.xhtml">Kunden hinzufügen</a></li>
-                    <li class="active"><a href="adminDeleteUser.xhtml">Kunden löschen</a></li>
+                    <li><a href="adminDeleteUser.xhtml">Kunden löschen</a></li>
                     <li><a href="#{logout.logout()}">Logout</a></li>
                 </ui:decorate>
             </ui:define>
         </div>
         <ui:define name="content">
             <b:panel title="Alle Kunden" collapsible="false">               
-                <h:dataTable value="" var="user"
-                             styleClass="order-table"
-                             headerClass="order-table-header"
-                             rowClasses="order-table-odd-row,order-table-even-row"
+                <h:dataTable value="#{userListBean.userlist}" var="user"
+                             styleClass="userTable"
+                             headerClass="userTableHeader"
+                             rowClasses="userTableOddRow,userTableEvenRow"
                              >
 
                     <h:column>
                         <!-- column header -->
                         <f:facet name="header">Name</f:facet>
                         <!-- row record -->
-                        #{o.orderNo}
+                        #{user.nachname}
                     </h:column>
 
                     <h:column>
                         <f:facet name="header">Vorname</f:facet>
-                            #{o.productName}
+                            #{user.vorname}
                     </h:column>
 
                     <h:column>
                         <f:facet name="header">Username</f:facet>
-                            #{o.price}
+                            #{user.username}
                     </h:column>
 
                     <h:column>
                         <f:facet name="header">Kontonummer</f:facet>
-                            #{o.qty}
+                            #{user.kontonummer}
                     </h:column>
                     <h:column>
                         <f:facet name="header">Passwort</f:facet>
-                            #{o.qty}
+                            #{user.passwort}
                     </h:column>
-
                 </h:dataTable>
-
+            </b:panel>
 
         </ui:define>
     </ui:composition>

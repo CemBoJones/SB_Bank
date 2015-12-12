@@ -25,14 +25,16 @@ and open the template in the editor.
                 <h:form style="margin:10px;">
                     <p>Überweisung an:</p>
                     <h:panelGrid columns="2" >
+                        <h:outputLabel for="sender" class="space-right5">Sender (Kontonummer):</h:outputLabel>
+                        <b:inputText id="sender" value="#{transferBean.sender}"/>
                         <h:outputLabel for="name" class="space-right5">Empfänger (Kontonummer):</h:outputLabel>
-                        <b:inputText id="name" value=""/>
-                        <h:outputLabel for="sum" class="space-right5">Betrag:</h:outputLabel>
-                        <b:inputSecret id="sum" value=""/>
+                        <b:inputText id="name" value="#{transferBean.destiny}"/>
+                        <h:outputLabel for="amount" class="space-right5">Betrag:</h:outputLabel>
+                        <b:inputText id="amount" value="#{transferBean.amount}"/>
                         <h:outputLabel for="tan" class="space-right5">TAN:</h:outputLabel>
-                        <b:inputSecret id="tan" value=""/>
+                        <b:inputText id="tan" />
                     </h:panelGrid>
-                    <b:commandButton value="Überweisen" action="#{login.login}"  />
+                    <b:commandButton value="Überweisen" action="#{transferBean.doTransfere()}"  />
                 </h:form>
             </b:panel>
         </ui:define>
