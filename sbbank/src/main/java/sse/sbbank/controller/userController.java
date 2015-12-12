@@ -32,7 +32,6 @@ public class UserController implements Serializable{
         this.init();
     }
     
-    
     public void init (){
         userlist = dbaccess.getUserListFromDB();
     }
@@ -51,7 +50,7 @@ public class UserController implements Serializable{
         }
         return nextKontonummer;
     }
-
+    
     public String getVorname() {
         return vorname;
     }

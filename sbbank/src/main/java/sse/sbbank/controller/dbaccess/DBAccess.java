@@ -117,6 +117,10 @@ public class DBAccess implements Serializable {
             }
         }
     }
+    
+    public void transfer(int sender, int destiny, double amount){
+        //TODO 
+    }
 
     public void insertPersonenToDB(User toAdd) {
         try {
