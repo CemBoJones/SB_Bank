@@ -16,10 +16,10 @@ and open the template in the editor.
             <ui:define name="leftSidebar">
                 <ui:decorate template="templates/default/leftSidebar.xhtml">
                     <li><a href="adminhome.xhtml">Übersicht</a></li>
-                    <li><a href="#">Kunden anzeigen</a></li>
+                    <li><a href="adminShowAll.xhtml">Kunden anzeigen</a></li>
                     <li><a href="adminAddUser.xhtml">Kunden hinzufügen</a></li>
                     <li class="active"><a href="adminDeleteUser.xhtml">Kunden löschen</a></li>
-                    <li><a href="#">Logout</a></li>
+                    <li><a href="#{logout.logout()}">Logout</a></li>
                 </ui:decorate>
             </ui:define>
         </div>

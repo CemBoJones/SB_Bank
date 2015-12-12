@@ -17,12 +17,12 @@ and open the template in the editor.
                 <li><a href="userhome.xhtml">Übersicht</a></li>
                 <li><a href="userBankBalance.xhtml">Kontostand anzeigen</a></li>
                 <li class="active"><a href="userTransfer.xhtml">Neue Überweisung</a></li>
-                <li><a href="#">Logout</a></li>
+                <li><a href="#{logout.logout()}">Logout</a></li>
             </ui:decorate>
         </ui:define>
         <ui:define name="content">
             <b:panel title="Neue Überweisung" collapsible="false">               
-                <h:form style="margin:10px;     ">
+                <h:form style="margin:10px;">
                     <p>Überweisung an:</p>
                     <h:panelGrid columns="2" >
                         <h:outputLabel for="name" class="space-right5">Empfänger (Kontonummer):</h:outputLabel>
