@@ -17,9 +17,9 @@ import sse.sbbank.controller.dbaccess.DBAccess;
 @SessionScoped
 public class TransferBean {
     private DBAccess dBAccess;
-    int sender; 
-    int destiny;
-    double amount;
+    private int sender; 
+    private int destiny;
+    private double amount;
     
     public TransferBean(){
         dBAccess = new DBAccess();

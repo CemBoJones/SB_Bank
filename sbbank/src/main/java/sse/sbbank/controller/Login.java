@@ -5,10 +5,13 @@ package sse.sbbank.controller;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+import java.io.Serializable;
 import java.util.List;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.inject.Named;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpSession;
 import sse.sbbank.controller.dbaccess.DBAccess;
 import sse.sbbank.model.User;
 
@@ -16,10 +19,9 @@ import sse.sbbank.model.User;
  *
  * @author Marco
  */
-@Named
 @ManagedBean
 @SessionScoped
-public class Login {
+public class Login implements Serializable {
 
     private String userName;
     private String password;
@@ -52,44 +54,30 @@ public class Login {
                 found = true;
                 foundUser = i;
             }
-
         }
         if (found) {
             User user = userList.get(foundUser);
+            HttpSession session = SessionBean.getSession();
             if (user.isIsAdmin()) {
+                session.setAttribute("username", userName);
                 return "Admin success";
-            }else return "success";
+            } else {
+                session.setAttribute("username", userName);
+                return "success";
+            }
         } else {
+            FacesContext.getCurrentInstance().addMessage(
+                    null,
+                    new FacesMessage(FacesMessage.SEVERITY_WARN,
+                            "Incorrect Username and Passoword",
+                            "Please enter correct username and Password"));
             return "fail";
         }
     }
-
-//    public void validatePassword(ComponentSystemEvent event) {
-//        FacesContext fc = FacesContext.getCurrentInstance();
-//        UIComponent comp = event.getComponent();
-//        
-//        UIInput pass1 = (UIInput) comp.findComponent("passwordText");
-//        String password1 = "";
-//        if(pass1.getLocalValue() != null){
-//            password1 = pass1.getLocalValue().toString();
-//        }
-//        
-//        UIInput pass2 = (UIInput) comp.findComponent("passwordText2");
-//        String password2 = "";
-//        if(pass2.getLocalValue() != null){
-//            password2 = pass2.getLocalValue().toString();
-//        }
-//        
-//        String passwordID = pass2.getClientId();
-//        
-//        if(password1.isEmpty() || password2.isEmpty()){
-//            return;
-//        }
-//        
-//        if(!password1.endsWith(password2)){
-//            FacesMessage fm = new FacesMessage("Die passwörter stimmen nicht überein");
-//            fm.setSeverity(FacesMessage.SEVERITY_ERROR);
-//            fc.addMessage(passwordID, fm);
-//            fc.renderResponse();
-//        }
+    
+    public String logout() {
+        HttpSession session = SessionBean.getSession();
+        session.invalidate();
+        return "/sbbank/index.xhtml?faces-redirect=true";
+    }
 }

@@ -119,7 +119,29 @@ public class DBAccess implements Serializable {
     }
     
     public void transfer(int sender, int destiny, double amount){
-        //TODO 
+         try {
+            Class.forName("com.mysql.jdbc.Driver"); // Datenbanktreiber für JDBC Schnittstellen laden.
+            // Verbindung zur JDBC-Datenbank herstellen.
+            connect = DriverManager.getConnection("jdbc:mysql://" + db_host + ":" + db_port + "/mysql?" + "user=" + db_user + "&password=" + db_password);
+        } catch (ClassNotFoundException e) {
+        } catch (SQLException e) {
+        }
+        if (connect != null) {
+            // Abfrage-Statement erzeugen.
+            Statement query;
+            try {
+                query = connect.createStatement();
+                String sql = "call mydb.transfer ( "
+                        + sender + ","
+                        + destiny + ","
+                        + amount + ");";
+                query.executeUpdate(sql);
+            } catch (SQLException e) {
+                if (DEBUG) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 
     public void insertPersonenToDB(User toAdd) {
