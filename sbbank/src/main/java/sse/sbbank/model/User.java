@@ -8,6 +8,7 @@ package sse.sbbank.model;
 import java.io.Serializable;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.bean.ManagedBean;
+import sse.sbbank.controller.dbaccess.DBAccess;
 
 /**
  *
@@ -93,6 +94,16 @@ public class User implements Serializable{
         this.isAdmin = isAdmin;
     }
 
+    public void transferToUser(int destiny, double amount){
+        int sender = this.getKontonummer();
+
+        DBAccess instance = new DBAccess();   
+        instance.transfer(sender, destiny, amount);
+        
+        this.setKontostand(instance.getUser(sender).getKontostand());   
+    }
+    
+    
     @Override
     public int hashCode() {
         int hash = 5;

@@ -36,24 +36,15 @@ public class DBAccess implements Serializable {
     private final String db_password = "";
 
     /**
-     * Connects to the User DB and creates User Objects in a list from the
-     * date records.
+     * Connects to the User DB and creates User Objects in a list from the date
+     * records.
      *
      * @return PersonenList
      */
+    
     public List<User> getUserListFromDB() {
-        try {
-            Class.forName("com.mysql.jdbc.Driver"); // Datenbanktreiber für JDBC Schnittstellen laden.
-
-            // Verbindung zur JDBC-Datenbank herstellen.
-            connect = DriverManager.getConnection("jdbc:mysql://" + db_host + ":" + db_port + "/mysql?" + "user=" + db_user + "&password=" + db_password);
-        } catch (SQLException e) {
-            if (DEBUG) {
-                e.printStackTrace();
-            }
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(DBAccess.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        
+        connectToMyDb();
 
         if (connect != null) {
             // Abfrage-Statement erzeugen.
@@ -90,25 +81,17 @@ public class DBAccess implements Serializable {
     }
 
     public void deletePersonFromDB(int idUser) {
-        try {
-            Class.forName("com.mysql.jdbc.Driver"); // Datenbanktreiber für JDBC Schnittstellen laden.
 
-            // Verbindung zur JDBC-Datenbank herstellen.
-            connect = DriverManager.getConnection("jdbc:mysql://" + db_host + ":" + db_port + "/mysql?" + "user=" + db_user + "&password=" + db_password);
-        } catch (ClassNotFoundException e) {
-            
-        } catch (SQLException e) {
-            
-        }
-
+        connectToMyDb(); 
+        
         if (connect != null) {
             // Abfrage-Statement erzeugen.
             Statement query;
             try {
                 query = connect.createStatement();
 
-                String sql = "Delete From mydb.USER where idUser = \"" + idUser + "\";";
-                int result = query.executeUpdate(sql);
+                String sql = "delete from mydb.user where idUser = " + idUser + ";";
+                query.executeUpdate(sql);
 
             } catch (SQLException e) {
                 if (DEBUG) {
@@ -117,25 +100,63 @@ public class DBAccess implements Serializable {
             }
         }
     }
-    
-    public void transfer(int sender, int destiny, double amount){
-         try {
-            Class.forName("com.mysql.jdbc.Driver"); // Datenbanktreiber für JDBC Schnittstellen laden.
-            // Verbindung zur JDBC-Datenbank herstellen.
-            connect = DriverManager.getConnection("jdbc:mysql://" + db_host + ":" + db_port + "/mysql?" + "user=" + db_user + "&password=" + db_password);
-        } catch (ClassNotFoundException e) {
-        } catch (SQLException e) {
-        }
+/*liest User-objekt aus der Datenbank, gibt null zurück falls es nicht geht*/
+    public User getUser(int idUser) {
+            String vorname ="";
+            String nachname="";
+            String username="";
+            String passwort="";
+            double kontostand=0;
+            boolean isAdmin=true;
+      
+        
+        connectToMyDb();
+
         if (connect != null) {
             // Abfrage-Statement erzeugen.
             Statement query;
             try {
                 query = connect.createStatement();
+
+                String sql = "Select * from mydb.user where idUser = " + idUser +";" ;              
+                ResultSet result = query.executeQuery(sql);
+                // Ergebnisstabelle durchforsten    
+
+                if (!result.next()) return null;
+                       // result.getInt("idUSER"),
+                    vorname=result.getString("vorname");
+                    nachname=result.getString("nachname");
+                    username=result.getString("username");
+                    passwort =result.getString("passwort");
+                    kontostand=result.getDouble("kontostand");
+                    isAdmin = result.getBoolean("isAdmin");
+                
+
+            } catch (SQLException e) {
+                if (DEBUG) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        User toGet = new User(idUser,vorname,nachname,username,passwort,kontostand,isAdmin);
+        return toGet;
+    }
+
+    public void transfer(int sender, int destiny, double amount) {
+        
+        connectToMyDb();
+
+        if (connect != null) {
+            // Abfrage-Statement erzeugen.
+            Statement query;
+            try {
+                query = connect.createStatement();
+
                 String sql = "call mydb.transfer ( "
                         + sender + ","
                         + destiny + ","
                         + amount + ");";
-                query.executeUpdate(sql);
+                query.executeQuery(sql);
             } catch (SQLException e) {
                 if (DEBUG) {
                     e.printStackTrace();
@@ -145,17 +166,9 @@ public class DBAccess implements Serializable {
     }
 
     public void insertPersonenToDB(User toAdd) {
-        try {
-            Class.forName("com.mysql.jdbc.Driver"); // Datenbanktreiber für JDBC Schnittstellen laden.
 
-            // Verbindung zur JDBC-Datenbank herstellen.
-            connect = DriverManager.getConnection("jdbc:mysql://" + db_host + ":" + db_port + "/mysql?" + "user=" + db_user + "&password=" + db_password);
-        } catch (ClassNotFoundException e) {
-
-        } catch (SQLException e) {
-
-        }
-
+        connectToMyDb();
+        
         if (connect != null) {
             // Abfrage-Statement erzeugen.
             Statement query;
@@ -169,7 +182,7 @@ public class DBAccess implements Serializable {
                         + toAdd.getUsername() + "\", \""
                         + toAdd.getPasswort() + "\", \""
                         + toAdd.getKontostand() + "\", \""
-                        + (toAdd.isIsAdmin()?1:0) + "\""
+                        + (toAdd.isIsAdmin() ? 1 : 0) + "\""
                         + ");";
                 int result = query.executeUpdate(sql);
             } catch (SQLException e) {
@@ -179,4 +192,20 @@ public class DBAccess implements Serializable {
             }
         }
     }
+    public void connectToMyDb(){
+            try {
+            Class.forName("com.mysql.jdbc.Driver"); // Datenbanktreiber für JDBC Schnittstellen laden.
+
+            // Verbindung zur JDBC-Datenbank herstellen.
+            connect = DriverManager.getConnection("jdbc:mysql://" + db_host + ":" + db_port + "/mysql?" + "user=" + db_user + "&password=" + db_password);
+        } catch (SQLException e) {
+            if (DEBUG) {
+                e.printStackTrace();
+            }
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(DBAccess.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
+    
 }
