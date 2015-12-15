@@ -94,13 +94,15 @@ public class User implements Serializable{
         this.isAdmin = isAdmin;
     }
 
-    public void transferToUser(int destiny, double amount){
+    public void transferToUser(int destiny, double amount, String tan){
+        
         int sender = this.getKontonummer();
 
         DBAccess instance = new DBAccess();   
-        instance.transfer(sender, destiny, amount);
-        
-        this.setKontostand(instance.getUser(sender).getKontostand());   
+        if (instance.isUsable(tan)){
+        instance.transfer(sender, destiny, amount);        
+        this.setKontostand(instance.getUser(sender).getKontostand());
+        }
     }
     
     

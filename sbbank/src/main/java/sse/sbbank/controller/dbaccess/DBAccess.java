@@ -6,6 +6,7 @@
 package sse.sbbank.controller.dbaccess;
 
 import java.io.Serializable;
+import java.math.BigInteger;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -192,6 +193,90 @@ public class DBAccess implements Serializable {
             }
         }
     }
+    
+    public boolean isUsable(String tan){       
+        
+        boolean isUsable=false;
+        
+        connectToMyDb();
+        
+        if (connect != null) {
+            // Abfrage-Statement erzeugen.
+            Statement query;
+            try {
+                query = connect.createStatement();
+
+                String sql = "Select usable from mydb.tans where tan = " + tan +";" ;              
+                ResultSet result = query.executeQuery(sql);
+                // Ergebnisstabelle durchforsten    
+
+                if (!result.next()) return false;
+                       // result.getInt("idUSER"),
+
+                    isUsable = result.getBoolean("usable");
+                
+
+            } catch (SQLException e) {
+                if (DEBUG) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return isUsable;
+    }
+    public int getId(String tan){
+
+ 
+        int idTans=0;
+        
+        connectToMyDb();
+        
+        if (connect != null) {
+            // Abfrage-Statement erzeugen.
+            Statement query;
+            try {
+                query = connect.createStatement();
+
+                String sql = "Select idTans from mydb.tans where tan = " + tan +";" ;              
+                ResultSet result = query.executeQuery(sql);
+                // Ergebnisstabelle durchforsten    
+
+                if (!result.next()) return -1;
+                       // result.getInt("idUSER"),
+
+                    idTans = result.getInt("idTans");
+                
+
+            } catch (SQLException e) {
+                if (DEBUG) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return idTans;
+    }
+        
+    public void useTan(String tan){
+
+        
+        connectToMyDb();
+        int idTans=getId(tan);
+        
+        if (connect != null) {
+            // Abfrage-Statement erzeugen.
+            Statement query;
+            try {
+                query = connect.createStatement();
+                String sql = "Update mydb.tans set usable = 0 where idtans = " + idTans +";" ;              
+                query.executeUpdate(sql);
+            } catch (SQLException e) {
+                if (DEBUG) {
+                    e.printStackTrace();
+                }
+            }
+        }    
+    }
+    
     public void connectToMyDb(){
             try {
             Class.forName("com.mysql.jdbc.Driver"); // Datenbanktreiber für JDBC Schnittstellen laden.

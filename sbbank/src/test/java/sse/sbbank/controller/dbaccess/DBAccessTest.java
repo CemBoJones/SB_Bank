@@ -5,6 +5,7 @@
  */
 package sse.sbbank.controller.dbaccess;
 
+import java.math.BigInteger;
 import java.util.List;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -140,4 +141,59 @@ public class DBAccessTest {
         // TODO review the generated test code and remove the default call to fail.
         //}
     }
+
+    /**
+     * Test of isUsable method, of class DBAccess.
+     */
+    @Test
+    public void testIsUsable() {
+        System.out.println("isUsable");
+        String tan = "3058757733";
+        DBAccess instance = new DBAccess();
+        boolean expResult = true;
+        boolean result = instance.isUsable(tan);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        //fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of useTan method, of class DBAccess.
+     */
+    @Test
+    public void testUseTan() {
+        System.out.println("useTan");
+        String tan = "3058757733";
+        DBAccess instance = new DBAccess();
+        instance.useTan(tan);
+        assertEquals(false,instance.isUsable(tan));
+    }
+
+    /**
+     * Test of getId method, of class DBAccess.
+     */
+    @Test
+    public void testGetId() {
+        System.out.println("getId");
+        String tan = "3058757733";
+        DBAccess instance = new DBAccess();
+        int expResult = 144;
+        int result = instance.getId(tan);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        //fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of connectToMyDb method, of class DBAccess.
+     */
+
+    /**
+     * Test of connectToMyDb method, of class DBAccess.
+     */
+
+    /**
+     * Test of connectToMyDb method, of class DBAccess.
+     */
+    
 }
