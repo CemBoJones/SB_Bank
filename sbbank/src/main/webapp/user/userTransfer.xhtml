@@ -1,23 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
-    <ui:composition template="templates/default/template.xhtml"
+    <ui:composition template="/templates/default/template.xhtml"
                     xmlns="http://www.w3.org/1999/xhtml"
                     xmlns:h="http://xmlns.jcp.org/jsf/html"
                     xmlns:f="http://java.sun.com/jsf/core"
                     xmlns:b="http://bootsfaces.net/ui"
                     xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
         <ui:define name="leftSidebar">
-            <ui:decorate template="templates/default/leftSidebar.xhtml">
-                <li><a href="userhome.xhtml">Übersicht</a></li>
-                <li><a href="userBankBalance.xhtml">Kontostand anzeigen</a></li>
-                <li class="active"><a href="userTransfer.xhtml">Neue Überweisung</a></li>
-                <li><a href="#{login.logout()}">Logout</a></li>
+            <ui:decorate template="/templates/default/leftSidebar.xhtml">
+                <li><a href="/sbbank/user/userhome.xhtml">Übersicht</a></li>
+                <li><a href="/sbbank/user/userBankBalance.xhtml">Kontostand anzeigen</a></li>
+                <li class="active"><a href="/sbbank/user/userTransfer.xhtml">Neue Überweisung</a></li>
+                <h:form>
+                    <b:commandButton value="Logout" action="#{login.logout()}" />
+                </h:form>
             </ui:decorate>
         </ui:define>
         <ui:define name="content">
@@ -26,7 +23,7 @@ and open the template in the editor.
                     <p>Überweisung an:</p>
                     <h:panelGrid columns="2" >
                         <h:outputLabel for="sender" class="space-right5">Sender (Kontonummer):</h:outputLabel>
-                        <b:inputText id="sender" value="#{transferBean.sender}"/>
+                        <h:outputText id="sender" value="#{user.kontonummer}" />
                         <h:outputLabel for="name" class="space-right5">Empfänger (Kontonummer):</h:outputLabel>
                         <b:inputText id="name" value="#{transferBean.destiny}"/>
                         <h:outputLabel for="amount" class="space-right5">Betrag:</h:outputLabel>
@@ -34,7 +31,8 @@ and open the template in the editor.
                         <h:outputLabel for="tan" class="space-right5">TAN:</h:outputLabel>
                         <b:inputText id="tan" />
                     </h:panelGrid>
-                    <b:commandButton value="Überweisen" action="#{transferBean.doTransfere()}"  />
+                    <ui:param name="kontonr" value="#{user.kontonummer}" />
+                    <b:commandButton value="Überweisen" action="#{transferBean.doTransfere(kontonr)}"  />
                 </h:form>
             </b:panel>
         </ui:define>

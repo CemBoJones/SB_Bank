@@ -25,8 +25,8 @@ public class TransferBean {
         dBAccess = new DBAccess();
     }
     
-    public void doTransfere(){
-        dBAccess.transfer(sender, destiny, amount);
+    public void doTransfere(int kontonummerUser){
+        dBAccess.transfer(kontonummerUser, destiny, amount);
     }
 
     public int getSender() {
