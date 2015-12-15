@@ -50,19 +50,8 @@ public class AuthorizationFilter implements Filter {
                             "Test:  " + sess.getAttribute("username").toString(),
                             " " + sess.toString()));
             }
-            
-                //            String reqURI = req.getRequestURI();
-                //            if (
-                //                    reqURI.indexOf("/index.xhtml") >= 0
-                //                    || (sess != null && sess.getAttribute("username") != null)
-                //                    || reqURI.contains("javax.faces.resource"))
-                //                    
-                //                chain.doFilter(request, response);
-                
             else
                     chain.doFilter(request, response);
-             
-                //res.sendRedirect(req.getContextPath() + "/index.xhtml");
             }catch (Exception e) {
             System.out.println(e.getMessage());
         }

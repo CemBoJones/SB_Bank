@@ -7,6 +7,7 @@ package sse.sbbank.controller;
  */
 import java.io.Serializable;
 import java.util.List;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
@@ -56,46 +57,46 @@ public class Login implements Serializable {
     }
 
     public String login() {
-//        userList = userAccess.getUserListFromDB();
-//        boolean found = false;
-//        int foundUser = -1;
-//        for (int i = 0; i < userList.size(); i++) {
-//            if (userName.equals(userList.get(i).getUsername()) && password.equals(userList.get(i).getPasswort())) {
-//                found = true;
-//                foundUser = i;
-//            }
-//        }
-//        if (found) {
-//            User user = userList.get(foundUser);
-//            HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
-//            if (user.isIsAdmin()) {
-//                session.setAttribute("username", userName);
-//                return "Admin success";
-//            } else {
-//                session.setAttribute("username", userName);
-//                return "success";
-//            }
-//        } else {
-//            FacesContext.getCurrentInstance().addMessage(
-//                    null,
-//                    new FacesMessage(FacesMessage.SEVERITY_WARN,
-//                            "Incorrect Username and Passoword",
-//                            "Please enter correct username and Password"));
-//            return "fail";
-//        }
-        String username = "test";
-        String pw = "123";
-        
-        loggedUser.setUsername(username);
-        loggedUser.setKontostand(100.0);
-        loggedUser.setKontonummer(1);
-        if (username.equals(userName) && pw.equals(password)) {
+        userList = userAccess.getUserListFromDB();
+        boolean found = false;
+        int foundUser = -1;
+        for (int i = 0; i < userList.size(); i++) {
+            if (userName.equals(userList.get(i).getUsername()) && password.equals(userList.get(i).getPasswort())) {
+                found = true;
+                foundUser = i;
+            }
+        }
+        if (found) {
+            User user = userList.get(foundUser);
             HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
-            session.setAttribute("username", username);
-            return "Admin success";
+            if (user.isIsAdmin()) {
+                session.setAttribute("username", userName);
+                return "Admin success";
+            } else {
+                session.setAttribute("username", userName);
+                return "success";
+            }
         } else {
+            FacesContext.getCurrentInstance().addMessage(
+                    null,
+                    new FacesMessage(FacesMessage.SEVERITY_WARN,
+                            "Incorrect Username and Passoword",
+                            "Please enter correct username and Password"));
             return "fail";
         }
+//        String username = "test";
+//        String pw = "123";
+//        
+//        loggedUser.setUsername(username);
+//        loggedUser.setKontostand(100.0);
+//        loggedUser.setKontonummer(1);
+//        if (username.equals(userName) && pw.equals(password)) {
+//            HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+//            session.setAttribute("username", username);
+//            return "Admin success";
+//        } else {
+//            return "fail";
+//        }
     }
 
     public String logout() throws ServletException {
