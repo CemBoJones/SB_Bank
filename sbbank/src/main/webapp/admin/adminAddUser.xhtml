@@ -33,15 +33,15 @@ and open the template in the editor.
                     <p>Daten des neuen Kunden:</p>
                     <h:panelGrid columns="2" >
                         <h:outputLabel for="name" class="space-right5">Nachname:</h:outputLabel>
-                        <b:inputText id="name" value="#{addUserBean.nachname}"/>
+                        <b:inputText id="name" value="#{userListBean.nachname}"/>
                         <h:outputLabel for="surname" class="space-right5">Vorname:</h:outputLabel>
-                        <b:inputText id="surname" value="#{addUserBean.vorname}"/>
+                        <b:inputText id="surname" value="#{userListBean.vorname}"/>
                         <h:outputLabel for="username" class="space-right5">Username:</h:outputLabel>
-                        <b:inputText id="username" value="#{addUserBean.username}"/>
+                        <b:inputText id="username" value="#{userListBean.username}"/>
                         <h:outputLabel for="password" class="space-right5">Passwort:</h:outputLabel>
-                        <b:inputText id="password" value="#{addUserBean.passwort}"/>
+                        <b:inputText id="password" value="#{userListBean.passwort}"/>
                     </h:panelGrid>
-                    <b:commandButton value="Hinzufügen" action="#{addUserBean.addNewUser()}"  />
+                    <b:commandButton value="Hinzufügen" action="#{userListBean.addNewUser()}"  />
                 </h:form>
             </b:panel>
         </ui:define>

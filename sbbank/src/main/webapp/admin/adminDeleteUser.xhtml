@@ -33,9 +33,9 @@ and open the template in the editor.
                     <p>Kontonummer des Kunden:</p>
                     <h:panelGrid columns="2" >
                         <h:outputLabel for="kontoNo" class="space-right5">Kontonummer:</h:outputLabel>
-                        <b:inputText id="kontoNo" value="#{deleteUserBean.kontonummer}"/>                     
+                        <b:inputText id="kontoNo" value="#{userListBean.kontonummer}"/>                     
                     </h:panelGrid>
-                    <b:commandButton value="Löschen" action="#{deleteUserBean.deleteUser()}"  />
+                    <b:commandButton value="Löschen" action="#{userListBean.deleteUser()}"  />
                 </h:form>
             </b:panel>
             
