@@ -6,7 +6,7 @@ and open the template in the editor.
 -->
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
-    <ui:composition template="templates/default/template.xhtml"
+    <ui:composition template="/templates/default/template.xhtml"
                     xmlns="http://www.w3.org/1999/xhtml"
                     xmlns:h="http://xmlns.jcp.org/jsf/html"
                     xmlns:b="http://bootsfaces.net/ui"
@@ -14,11 +14,11 @@ and open the template in the editor.
                     xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
         <div class="col-sm-3 col-md-2 sidebar">
             <ui:define name="leftSidebar">
-                <ui:decorate template="templates/default/leftSidebar.xhtml">
-                    <li><a href="adminhome.xhtml">Übersicht</a></li>
-                    <li><a href="adminShowAll.xhtml">Kunden anzeigen</a></li>
-                    <li><a href="adminAddUser.xhtml">Kunden hinzufügen</a></li>
-                    <li class="active"><a href="adminDeleteUser.xhtml">Kunden löschen</a></li>
+                <ui:decorate template="/templates/default/leftSidebar.xhtml">
+                    <li><a href="/sbbank/admin/adminhome.xhtml">Übersicht</a></li>
+                    <li><a href="/sbbank/admin/adminShowAll.xhtml">Kunden anzeigen</a></li>
+                    <li><a href="/sbbank/admin/adminAddUser.xhtml">Kunden hinzufügen</a></li>
+                    <li class="active"><a href="/sbbank/admin/adminDeleteUser.xhtml">Kunden löschen</a></li>
                     <li><a href="#{login.logout()}">Logout</a></li>
                 </ui:decorate>
             </ui:define>
