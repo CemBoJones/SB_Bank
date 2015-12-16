@@ -6,7 +6,6 @@
 package sse.sbbank.controller.dbaccess;
 
 import java.io.Serializable;
-import java.math.BigInteger;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
