@@ -23,16 +23,16 @@
                     <p>Überweisung an:</p>
                     <h:panelGrid columns="2" >
                         <h:outputLabel for="sender" class="space-right5">Sender (Kontonummer):</h:outputLabel>
-                        <h:outputText id="sender" value="#{user.kontonummer}" />
+                        <h:outputText id="sender" value="#{login.loggedUser.kontonummer}" />
                         <h:outputLabel for="name" class="space-right5">Empfänger (Kontonummer):</h:outputLabel>
-                        <b:inputText id="name" value="#{transferBean.destiny}"/>
+                        <b:inputText id="name" value="#{login.destiny}"/>
                         <h:outputLabel for="amount" class="space-right5">Betrag:</h:outputLabel>
-                        <b:inputText id="amount" value="#{transferBean.amount}"/>
+                        <b:inputText id="amount" value="#{login.amount}"/>
                         <h:outputLabel for="tan" class="space-right5">TAN:</h:outputLabel>
                         <b:inputText id="tan" />
                     </h:panelGrid>
-                    <ui:param name="kontonr" value="#{user.kontonummer}" />
-                    <b:commandButton value="Überweisen" action="#{transferBean.doTransfere(kontonr)}"  />
+                    <ui:param name="kontonr" value="#{login.loggedUser.kontonummer}" />
+                    <b:commandButton value="Überweisen" action="#{login.doTransfere(kontonr)}"  />
                 </h:form>
             </b:panel>
         </ui:define>

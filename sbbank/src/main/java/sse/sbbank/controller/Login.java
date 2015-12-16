@@ -12,7 +12,6 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import sse.sbbank.controller.dbaccess.DBAccess;
 import sse.sbbank.model.User;
@@ -28,6 +27,25 @@ public class Login implements Serializable {
     private String userName;
     private String password;
     private User loggedUser = new User();
+    private DBAccess dBAccess = new DBAccess();
+    private int destiny;
+    private double amount;
+
+    public int getDestiny() {
+        return destiny;
+    }
+
+    public void setDestiny(int destiny) {
+        this.destiny = destiny;
+    }
+
+    public double getAmount() {
+        return amount;
+    }
+
+    public void setAmount(double amount) {
+        this.amount = amount;
+    }
 
     public User getLoggedUser() {
         return loggedUser;
@@ -36,7 +54,7 @@ public class Login implements Serializable {
     public void setLoggedUser(User loggedUser) {
         this.loggedUser = loggedUser;
     }
-    
+
     private DBAccess userAccess = new DBAccess();
     private List<User> userList = userAccess.getUserListFromDB();
 
@@ -56,6 +74,12 @@ public class Login implements Serializable {
         this.password = password;
     }
 
+    public void doTransfere(int kontonummerUser) {
+        dBAccess.transfer(kontonummerUser, destiny, amount);
+        double newKontostand = this.loggedUser.getKontostand()-amount;
+        this.loggedUser.setKontostand(newKontostand);
+    }
+
     public String login() {
         userList = userAccess.getUserListFromDB();
         boolean found = false;
@@ -67,9 +91,9 @@ public class Login implements Serializable {
             }
         }
         if (found) {
-            User user = userList.get(foundUser);
+            loggedUser = userList.get(foundUser);
             HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
-            if (user.isIsAdmin()) {
+            if (loggedUser.isIsAdmin()) {
                 session.setAttribute("username", userName);
                 return "Admin success";
             } else {
@@ -102,7 +126,7 @@ public class Login implements Serializable {
     public String logout() throws ServletException {
         HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
         session.invalidate();
-        
+
         return "logout";
     }
 }

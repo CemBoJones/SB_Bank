@@ -5,7 +5,6 @@
  */
 package sse.sbbank.controller;
 
-import java.util.LinkedList;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
